@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="d">12345</div>
+    <img src="bfm3jncr.jpg" alt="">
+    <button onclick="loadXMLDoc()">loadxml</button>
+</body>
+<script>
+    function loadXMLDoc()
+{
+	var xmlhttp;
+	if (window.XMLHttpRequest)
+	{
+		//  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+		xmlhttp=new XMLHttpRequest();
+	}
+	else
+	{
+		// IE6, IE5 浏览器执行代码
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function()
+	{
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+			document.getElementById("d").innerHTML=xmlhttp.responseText;
+		}
+	}
+	xmlhttp.open("GET","/ajax.txt",true);
+	xmlhttp.send();
+
+}
+</script>
+</html>

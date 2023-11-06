@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="main">
+        <button class="b" id="b1" type="button" onclick="b('b1')">  </button>
+        <button class="b" id="b2" type="button" onclick="b('b2')">  </button>
+        <button class="b" id="b3" type="button" onclick="b('b3')">  </button>
+        <button class="b" id="b4" type="button" onclick="b('b4')">  </button>
+        <button class="b" id="b5" type="button" onclick="b('b5')">  </button>
+        <br>
+        <button class="submit" id="sub" type="button" onclick="sb()">发牌</button>
+    </div>
+    
+</body>
+<style>
+    .b{
+        margin: 8px;
+        height: 200px;
+        width: 10vw;
+        font-size: 60px;
+        color: green;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+    .submit{
+        margin-top: 80px;
+        margin: 8px;
+        height: 80px;
+        width: 200px;
+        font-size: 40px;
+        color: green;
+        border-radius: 10px;
+        cursor: pointer;
+        
+    }
+</style>
+<script>
+    var rint = function(a,b){
+            r = Math.floor(Math.random()*(b-a)+a);
+            if (r == b) r -= 1;
+            return r;
+        };
+    var symbol = "♠♣♥♦";
+    var num = "A234567890JQK";
+    document.getElementById('sub').style.color = "green";
+    function b(id){
+        var button = document.getElementById(id);
+        if (button.style.color == "green") {
+            button.style.color = "grey";
+        } else {
+            button.style.color = "green";
+        }
+    }
+    function sb(){
+        var button = document.getElementById('sub');
+        console.log('sb');
+
+        if (button.style.color == "green") {
+            console.log('fapai');
+            fapai();
+            button.style.color = "yellow";
+            button.innerText = "抽牌";
+            //button.style.color = "green";
+            //button.InnerHTML = "发牌";
+        }
+        else if (button.style.color == "yellow") {
+            console.log('choupai');
+            choupai();
+            button.style.color = "blue";
+            button.innerText = "重置";
+        }
+        else if (button.style.color == "blue") {
+            console.log('reset');
+            reset();
+            button.style.color = "green";
+            button.innerText = "发牌";
+        }
+        else {
+            console.log('error');
+            document.getElementById('sub').style.color = "red";
+        }
+        console.log(button.style.color);
+    }
+
+    function fapai() {
+        
+        arr = Array();
+        for (var r=52, i=0; i<5; i++){
+            r = rint(0, 52-i);
+            for (j=0; j < arr.length; j++) {
+                if (r >= arr.concat().sort(function(a,b){return a-b;})[j]) r++;
+            }
+            arr.push(r);
+            var btn = document.getElementById('b' + (i+1));
+            btn.innerText = symbol[Math.floor(r / 13)] + "" + num[r % 13];
+            btn.style.color = "grey";
+            console.log(r);
+        }
+    }
+
+    function choupai() {
+        var indexArr = [];
+        var minusArr = [];
+        var rArr = [];
+        for (i=0; i<5; i++){
+            if (document.getElementById('b' + (i+1)).style.color == "green" ) {
+                indexArr.push(i);
+                text = document.getElementById('b' + (i+1)).innerText;
+                rArr.push(symbol.indexOf(text[0])*13+num.indexOf(text[1]));
+            }
+            else minusArr.push(i)
+        }
+        for (i=0; i<minusArr.length; i++) {
+            r = rint(0, 52 - rArr.length);
+            for (j=0; j < rArr.length; j++) {
+                if (r >= rArr.concat().sort(function(a,b){return a-b;})[j]) r++;
+            }
+            rArr.push(r);
+            document.getElementById('b'+(minusArr[i]+1)).innerText = symbol[Math.floor(r / 13)] + "" + num[r % 13];
+            document.getElementById('b'+(minusArr[i]+1)).color = 'blue';
+        }
+        
+    }
+    function reset() {
+        for (i=0; i<5; i++) {
+            document.getElementById('b' + (i+1)).innerText = "  "; 
+        }
+    }
+</script>
+</html>

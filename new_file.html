@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>宝石</title>
+</head>
+<body>
+	<div id="main">
+		<button class="submit" id="t1" type="button" onclick="your_turn()">确定</button>
+		<label id="tips"> </label>
+	    <button class="card unshown" id="row3card0" type="button" onclick="c('row3card0')">3</button>
+	    <button class="card" id="row3card1" type="button" onclick="c('row3card1')">?</button>
+	    <button class="card" id="row3card2" type="button" onclick="c('row3card2')">?</button>
+	    <button class="card" id="row3card3" type="button" onclick="c('row3card3')">?</button>
+	    <button class="card" id="row3card4" type="button" onclick="c('row3card4')">?</button>
+	    <br>
+		<button class="card unshown" id="row2card0" type="button" onclick="c('row2card0')">2</button>
+		<button class="card" id="row2card1" type="button" onclick="c('row2card1')">?</button>
+		<button class="card" id="row2card2" type="button" onclick="c('row2card2')">?</button>
+		<button class="card" id="row2card3" type="button" onclick="c('row2card3')">?</button>
+		<button class="card" id="row2card4" type="button" onclick="c('row2card4')">?</button>
+		<br>
+		<button class="card unshown" id="row1card0" type="button" onclick="c('row1card0')">1</button>
+		<button class="card" id="row1card1" type="button" onclick="c('row1card1')">?</button>
+		<button class="card" id="row1card2" type="button" onclick="c('row1card2')">?</button>
+		<button class="card" id="row1card3" type="button" onclick="c('row1card3')">?</button>
+		<button class="card" id="row1card4" type="button" onclick="c('row1card4')">?</button>
+		<br>
+			
+		<button class="jewel red" id="jred" type="button" onclick="j('jred')">7</button>
+		<button class="jewel blue" id="jblue" type="button" onclick="j('jblue')">7</button>
+		<button class="jewel green" id="jgreen" type="button" onclick="j('jgreen')">7</button>
+		<button class="jewel white" id="jwhite" type="button" onclick="j('jwhite')">7</button>
+		<button class="jewel black" id="jblack" type="button" onclick="j('jblack')">7</button>
+		<button class="jewel gold" id="jgold" type="button">5</button>
+		<button class="submit" id="submit" type="button" onclick="submit()">确定</button>
+		<button class="submit" id="retake" type="button" onclick="retake()">重选</button>
+		<br>
+			
+		<button class="nobility" id="n1" type="button">?</button>
+		<button class="nobility" id="n2" type="button">?</button>
+		<button class="nobility" id="n3" type="button">?</button>
+		<button class="nobility" id="n4" type="button">?</button>
+		<button class="nobility" id="n5" type="button">?</button>
+		
+		<label id="tips">预订区</label>
+		<button class="card booked" id="bookedcard0" type="button" onclick="bc('bookedcard0')"></button>
+		<button class="card booked" id="bookedcard1" type="button" onclick="bc('bookedcard1')"></button>
+		<button class="card booked" id="bookedcard2" type="button" onclick="bc('bookedcard2')"></button>
+		<br>
+		
+		<label id="tips">持有宝石</label>
+		<button class="jewel red" id="mjred" type="button" onclick="mj('mjred')">0</button>
+		<button class="jewel blue" id="mjblue" type="button" onclick="mj('mjblue')">0</button>
+		<button class="jewel green" id="mjgreen" type="button" onclick="mj('mjgreen')">0</button>
+		<button class="jewel white" id="mjwhite" type="button" onclick="mj('mjwhite')">0</button>
+		<button class="jewel black" id="mjblack" type="button" onclick="mj('mjblack')">0</button>
+		<button class="jewel gold" id="mjgold" type="button"  onclick="mj('mjgold')">0</button>
+		<br>
+		
+	</div>
+</body>
+<style>
+    .card{
+	    margin: 8px;
+	    height: 210px;
+	    width: 150px;
+	    font-size: 50px;
+	    border-radius: 10px;
+	    cursor: pointer;
+	}
+	.unshown{
+		background-color: darkslategrey;
+		box-shadow: 0 15px 4px black;
+		font-size:100px;
+		font-style: italic;
+		color: beige;
+	}
+	.booked{
+		display: none;
+	}
+		
+	.jewel{
+	    margin-top: 80px;
+	    margin: 8px;
+	    height: 80px;
+	    width: 80px;
+	    font-size: 40px;
+	    border-radius: 50%;
+	    cursor: pointer;
+		color: white;
+		text-shadow: 0 0 4px black;
+	}
+	.red{
+		background-color: red;
+	}
+	.blue{
+		background-color: blue;
+	}
+	.green{
+		background-color: limegreen;
+	}
+	.white{
+		background-color: white;
+	}
+	.black{
+		background-color: black;
+	}
+	.gold{
+		background-color: gold;
+	}
+	.submit{
+		margin-top: 80px;
+		margin: 8px;
+		height: 80px;
+		width: 130px;
+		font-size: 40px;
+		border-radius: 10px;
+	}
+		
+	.nobility{
+	    margin-top: 80px;
+	    margin: 8px;
+	    height: 130px;
+	    width: 130px;
+	    font-size: 40px;
+	    border-radius: 10px;
+	}
+</style>
+
+<script>
+	const colors = ["red","blue","green","white","black","gold"];
+	function your_turn(){//标识现在是用户的回合，之后应修改为服务器发送
+		//tips显示”轮到你了“
+		enable_bookedcard();
+		enable_cardontable();
+		enable_jewelontable();
+	}
+	
+	function enable_jewelontable(){
+		for (i=0;i<5;i++){
+			var button = document.getElementById('j'+colors[i]);
+			if (button.innerText > 0) button.disabled = false;
+		}
+	}
+	function enable_cardontable(){
+		for (i=0;i<5;i++){
+			for (j=1;j<4;j++){
+				var button = document.getElementById("row" + j + "card" + i);
+				if (button.innerText.length > 0) button.disabled = false;
+			}
+		}
+	}
+	function enable_bookedcard(){
+		for (j=0;j<3;j++){
+			var button = document.getElementById("bookedcard" + j);
+			if (button.innerText.length > 0) button.disabled = false;
+		}
+	}
+	
+	function c(rowicardj){
+		disable_bookedcard();
+		disable_jewelontable();
+		//if (canbuy){
+			
+			document.getElementById("buy").visibility = visible;
+		//}
+		//if (canbook){
+			
+			document.getElementById("book").visibility = visible;
+		//}
+		
+	}
+	function j(jcolor){
+		
+	}
+	
+	
+	function retake(){
+		
+	}
+	
+	function enable_myjewel(){
+		for (i=0;i<6;i++){
+			var button = document.getElementById('mj'+colors[i]);
+			if (button.innerText > 0) button.disabled = false;
+		}
+	}
+</script>
+
+</html>
