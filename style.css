@@ -1,0 +1,67 @@
+
+    .card{
+	    margin: 8px;
+	    height: 210px;
+	    width: 150px;
+	    font-size: 50px;
+	    border-radius: 10px;
+	    cursor: pointer;
+		background-color:#eee;
+	}
+	.unshown{
+		background-color: darkslategrey;
+		box-shadow: 0 15px 4px black;
+		font-size:100px;
+		font-style: italic;
+		color: beige;
+	}
+	.booked{
+		display: none;
+	}
+		
+	.jewel{
+	    margin-top: 80px;
+	    margin: 8px;
+	    height: 80px;
+	    width: 80px;
+	    font-size: 40px;
+	    border-radius: 50%;
+	    cursor: pointer;
+		color: white;
+		text-shadow: 0 0 4px black;
+	}
+	.red{
+		background-color: red;
+	}
+	.blue{
+		background-color: blue;
+	}
+	.green{
+		background-color: limegreen;
+	}
+	.white{
+		background-color: white;
+	}
+	.black{
+		background-color: black;
+	}
+	.gold{
+		background-color: gold;
+	}
+	.submit{
+		margin-top: 80px;
+		margin: 8px;
+		height: 80px;
+		width: 130px;
+		font-size: 40px;
+		border-radius: 10px;
+	}
+		
+	.nobility{
+	    margin-top: 80px;
+	    margin: 8px;
+	    height: 130px;
+	    width: 130px;
+	    font-size: 40px;
+	    border-radius: 10px;
+	}
